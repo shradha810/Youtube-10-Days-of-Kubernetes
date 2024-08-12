@@ -1,0 +1,22 @@
+1) https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+download the executable: https://dl.k8s.io/release/v1.29.1/bin/windows/amd64/kubectl.exe
+put in C:\kubectl
+edit the PATH environment variable with the folder of the kubectl.exe
+kubectl --version
+
+2) curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.20.0/kind-windows-amd64
+put the kind-windows-amd64.exe in C:\kind and rename it to kind.exe
+edit the PATH environment variable with the folder of the kind.ex
+kind --version
+
+3) create a yaml configuration for a cluster with two noes: 1 master and 1 worker:
+kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+
+4) enable kubernetes in docker desktop and "apply and restart"
+
+5) kind create cluster --name shradha --config kind-config.yaml

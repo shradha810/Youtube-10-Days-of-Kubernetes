@@ -1,0 +1,7 @@
+WELCOME TO DAY 3 of 10 DAYS of KUBERNETES SERIES
+
+Multi-Container Strategies
+1) Sidecar
+2) Ambassador: main application -> proxy ->dev,stg,prod
+3) Adaptor: transformation json, txt -> Adaptor -> json logs
+4) init Container: perform some task before main application | multiple init containers

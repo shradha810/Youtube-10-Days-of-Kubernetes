@@ -1,0 +1,14 @@
+###### IMPERATIVE #####
+kubectl run nginx-imperative --image=nginx:latest
+kubectl get pods
+kubectl describe pod nginx-imperative
+
+###### Declarative ######
+kubectl run nginx-pod --image=nginx:latest --dry-run=client -o yaml > nginx-pod.yaml
+kubectl apply -f nginx-pod.yaml
+
+###### Multi-Container POD #####
+kubectl apply -f multi-container-pod.yaml
+kubectl get pods
+kubectl exec -it multi-container-pod -- curl http://multi-container-pod
+kubectl logs multi-container-pod -c sidecar-container
