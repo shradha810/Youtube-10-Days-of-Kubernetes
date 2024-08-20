@@ -1,0 +1,24 @@
+'''
+get current cluster, delete it and create another which has port mappings for a node port service
+to be accessible outside the kind cluster.
+Kind-config can be created using kind documentation: https://kind.sigs.k8s.io/docs/user/quick-start/
+'''
+kubectl config get-contexts
+kubectl config delete-context kind-shradha
+kind get clusters
+docker ps -a
+docker rm -f <container-id-control-plane> <container-id-worker>
+kind create cluster --name shradha --config kind-config.yaml
+
+
+Services:
+external user -> frontend service(NodePort) -> frontend deployment -> backend service (clusterIP) -> backend deployment
+Types:
+1) clusterIP: default
+internal IP to your service
+2) NodePort [30000-32767]
+NodeIP:NodePort
+client -> nodeport -> service port -> target port
+3) Load Balancer
+
+DNS
