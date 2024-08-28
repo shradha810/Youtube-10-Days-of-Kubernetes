@@ -1,0 +1,21 @@
+Provisioning:
+1) static
+2) Dynamic
+
+Access Modes
+1) RWO: RW by only 1 node. Databases
+2) ROX: R only by n nodes. configuration sharing
+3) RWX: RW by many nodes. shared cache, file sharing
+4) RWOP: RW by only 1 pod. exclusive access to storage
+
+Reclaim Policies:
+1) Retain: data retention even if PVC gets deleted
+2) Delete: PV gets deleted if PVC gets deleted
+3) Recycle: PV is cleared and can be reused
+
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 400Mi
+  claimRef: null
