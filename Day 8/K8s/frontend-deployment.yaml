@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-frontend
+spec:
+  selector:
+    matchLabels:
+      app: project-frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: project-frontend
+    spec:
+      containers:
+      - name: project-frontend
+        image: docker.io/shradhaagarwal810/project-frontend
+        ports:
+        - containerPort: 8000
+        env:
+        - name: BACKEND_URL
+          value: http://project-backend:8500

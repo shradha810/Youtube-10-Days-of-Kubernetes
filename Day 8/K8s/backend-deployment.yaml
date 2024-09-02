@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-backend
+spec:
+  selector:
+    matchLabels:
+      app: project-backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: project-backend
+    spec:
+      containers:
+      - name: project-backend
+        image: docker.io/shradhaagarwal810/project-backend
+        ports:
+        - containerPort: 8500
+        env:
+        - name: MONGO
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO
