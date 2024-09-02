@@ -1,0 +1,8 @@
+docker build -t project-backend .
+docker tag project-backend shradhaagarwal810/project-backend
+docker push shradhaagarwal810/project-backend
+docker build -t project-frontend .
+docker tag project-frontend shradhaagarwal810/project-frontend
+docker push shradhaagarwal810/project-frontend
+
+kubectl port-forward svc/project-backend 7500:8500
