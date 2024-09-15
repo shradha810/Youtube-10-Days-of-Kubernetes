@@ -1,0 +1,16 @@
+1. create cert user (authentication)
+2. Create a role/Cluster role
+3. Create a role binding/Cluster role binding
+
+#CA cert and key
+docker cp project-control-plane:/etc/kubernetes/pki/ca.crt ca.crt
+docker cp project-control-plane:/etc/kubernetes/pki/ca.key ca.key
+#generate private key
+docker run --rm -it -v ${PWD}:/data frapsoft/openssl genrsa -out /data/shradha.key 2048
+#generate CSR
+docker run --rm -it -v ${PWD}:/data frapsoft/openssl req -new -key /data/shradha.key -out /data/shradha.csr -subj "/CN=shradha/O=development-team"
+#Sign the CSR
+docker run --rm -it -v ${PWD}:/data frapsoft/openssl x509 -req -in /data/shradha.csr -CA /data/ca.crt -CAkey /data/ca.key -CAcreateserial -out /data/shradha.crt -days 365
+#Add user to kubeconfig
+kubectl config set-credentials shradha --client-certificate=shradha.crt --client-key=shradha.key
+kubectl config set-context shradha-context --cluster=kind-project --namespace=default --user=shradha
